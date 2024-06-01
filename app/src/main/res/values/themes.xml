@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.TrabajoPractico2" parent="Base.Theme.TrabajoPractico2" />
+
+    <style name="DesaMobileTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Otros atributos del tema -->
+    </style>
 </resources>

@@ -1,16 +1,17 @@
-package com.example.trabajopractico2
+package com.example.trabajopractico2.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trabajopractico2.TpDesaMobileApp
 import com.example.trabajopractico2.databinding.ItemRecyclerviewBinding
+import com.example.trabajopractico2.model.User
 
 //private val itemClickListener: OnItemClickListener
-class ListAdapter(private val itemClickListener: (String, Int) -> Unit): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class ListAdapter(private val itemClickListener: (User) -> Unit): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
-    val list = listOf("Pedro", "Pepe", "Mengano", "Fulano","Pedro", "Pepe", "Mengano", "Fulano","Pedro", "Pepe", "Mengano", "Fulano","Pedro", "Pepe", "Mengano", "Fulano","Pedro", "Pepe", "Mengano", "Fulano")
-
+    private var list = emptyList<User>()
 
     inner class ListViewHolder(private val binding: ItemRecyclerviewBinding)
         :RecyclerView.ViewHolder(binding.root) { /*View.OnClickListener*/
@@ -19,10 +20,10 @@ class ListAdapter(private val itemClickListener: (String, Int) -> Unit): Recycle
             //    binding.root.setOnClickListener(this)
             //}
 
-        fun bind(name: String, position: Int) {
-            binding.tvItemName.text = name
+        fun bind(user: User, position: Int) {
+            binding.tvItemName.text = user.name
             binding.root.setOnClickListener {
-                itemClickListener(name, position)
+                itemClickListener(user)
             }
         }
 
@@ -49,6 +50,12 @@ class ListAdapter(private val itemClickListener: (String, Int) -> Unit): Recycle
 
     override fun getItemCount(): Int = list.size
 
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setList(users: List<User>) {
+        list = users
+        notifyDataSetChanged()
+    }
 
 
     interface OnItemClickListener {
